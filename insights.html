@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Notes from the practice — KKS & Co writing on AI SaaS unit economics, gross margins, retention, and pricing." />
+  <meta name="theme-color" content="#0A1F3D" />
+  <title>Insights &mdash; KKS &amp; Co</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A1F3D'/%3E%3Ctext x='50' y='62' text-anchor='middle' fill='%23F4EFE5' font-family='Georgia,serif' font-size='42' font-weight='500' font-style='italic'%3EK%3C/text%3E%3C/svg%3E" />
+
+  <style>
+    /* Page-specific */
+    .insights-hero {
+      padding-top: clamp(4rem, 7vw, 6rem);
+      padding-bottom: clamp(2rem, 4vw, 3rem);
+      border-bottom: 1px solid var(--rule);
+    }
+    .insights-hero .meta {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 1.6rem;
+    }
+    .insights-hero h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(2.4rem, 5vw, 4.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      max-width: 18ch;
+      font-variation-settings: 'opsz' 96;
+    }
+    .insights-hero p {
+      font-size: 1.08rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+      max-width: 60ch;
+      margin-top: 1.5rem;
+    }
+
+    .archive {
+      padding-top: clamp(3rem, 6vw, 5rem);
+      padding-bottom: clamp(5rem, 8vw, 7rem);
+    }
+
+    .archive-list { display: grid; gap: 0; }
+
+    .archive-item {
+      display: grid;
+      grid-template-columns: 130px 1fr 130px;
+      gap: 2rem;
+      align-items: baseline;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--rule);
+      transition: padding-left 280ms var(--ease);
+    }
+
+    .archive-item:hover { padding-left: 1rem; }
+
+    .archive-date {
+      font-family: var(--mono);
+      font-size: 0.86rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .archive-title {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(1.2rem, 2vw, 1.5rem);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .archive-tag {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      text-align: right;
+    }
+
+    .empty-note {
+      text-align: center;
+      padding: 4rem 0;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--muted);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+      margin-top: 3rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    @media (max-width: 720px) {
+      .archive-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .archive-tag { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="KKS & Co — home">
+        <span class="brand-mark">KKS</span>
+        <span class="brand-amp">&amp;</span>
+        <span class="brand-co">Co</span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="index.html#approach">Approach</a></li>
+          <li><a href="index.html#practice">Practice</a></li>
+          <li><a href="insights.html">Insights</a></li>
+          <li><a href="index.html#principal">Principal</a></li>
+          <li><a href="index.html#engage" class="nav-cta">Engage</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Insights hero -->
+    <section class="insights-hero">
+      <div class="container">
+        <p class="meta">Insights &middot; The archive</p>
+        <h1>Notes from the practice.</h1>
+        <p>
+          Writing on AI SaaS unit economics, gross-margin trajectories,
+          retention behaviour, and pricing structure. Published twice
+          monthly.
+        </p>
+      </div>
+    </section>
+
+    <!-- Archive list -->
+    <section class="archive">
+      <div class="container">
+        <p class="empty-note">
+          The archive opens with the first published essay shortly.
+          Until then, please follow along on
+          <a href="https://kksandco.substack.com" style="border-bottom: 1px solid var(--accent); color: var(--accent);">Substack</a>
+          or
+          <a href="https://twitter.com/kksandco" style="border-bottom: 1px solid var(--accent); color: var(--accent);">Twitter / X</a>.
+        </p>
+
+        <!--
+          Once articles are written, replace the empty-note above with the
+          archive-list below. Duplicate the .archive-item block per essay.
+
+          <div class="archive-list">
+            <a class="archive-item" href="essays/01-gross-margin.html">
+              <span class="archive-date">2026.05.14</span>
+              <span class="archive-title">
+                The four ways founders mis-state their gross margin in AI SaaS
+              </span>
+              <span class="archive-tag">Unit economics</span>
+            </a>
+          </div>
+        -->
+
+        <a href="index.html" class="back-link">
+          <svg viewBox="0 0 24 12" aria-hidden="true" width="22" height="11">
+            <path d="M24 6 L2 6 M8 1 L2 6 L8 11" stroke="currentColor" stroke-width="1.2" fill="none"/>
+          </svg>
+          Return to KKS &amp; Co
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">
+          <span>KKS</span>
+          <span class="amp">&amp;</span>
+          <span>Co</span>
+        </span>
+        <p class="footer-tagline">
+          Advisory for AI&#8209;native SaaS founders.
+        </p>
+      </div>
+
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Practice</h5>
+          <ul>
+            <li><a href="index.html#approach">Approach</a></li>
+            <li><a href="index.html#practice">Services</a></li>
+            <li><a href="insights.html">Insights</a></li>
+            <li><a href="index.html#principal">Principal</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Channels</h5>
+          <ul>
+            <li><a href="https://twitter.com/kksandco" rel="me">Twitter / X</a></li>
+            <li><a href="https://kksandco.substack.com" rel="me">Substack</a></li>
+            <li><a href="https://linkedin.com/company/kksandco" rel="me">LinkedIn</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="mailto:hello@kksandco.com">hello@kksandco.com</a></li>
+            <li><a href="https://cal.com/kksandco">Book a call</a></li>
+            <li>Colombo, Sri Lanka</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-rule"></div>
+
+      <div class="footer-bottom">
+        <span>&copy; <span id="year">2026</span> KKS &amp; Co. All rights reserved.</span>
+        <span class="colophon">
+          Set in Fraunces and IBM Plex Sans. Built by hand.
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
