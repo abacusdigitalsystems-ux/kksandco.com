@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KKS &amp; Co — Metrics analysis for bootstrapped SaaS founders</title>
+  <meta name="description" content="Find what's leaking your MRR. Audits, retainers, and growth sprints for bootstrapped SaaS founders." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --logo-dark: #0B1D2F;
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F8F9FB;
+      --bg-tertiary: #EEF1F5;
+      --text-primary: #0B1D2F;
+      --text-secondary: #3D4F5F;
+      --text-muted: #7A8999;
+      --accent-primary: #1E4976;
+      --accent-hover: #153A5E;
+      --accent-light: #E8EFF6;
+      --border-light: #E2E8ED;
+      --border-medium: #CDD8E0;
+      --shadow-sm: 0 2px 8px rgba(11, 29, 47, 0.06);
+      --shadow-md: 0 4px 16px rgba(11, 29, 47, 0.08);
+      --shadow-lg: 0 12px 32px rgba(11, 29, 47, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 44px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ---------- Top bar ---------- */
+    header {
+      padding: 26px 0;
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border-light);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.97);
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+    .topbar nav {
+      display: flex;
+      gap: 40px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .topbar nav a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.28s ease;
+      position: relative;
+      letter-spacing: 0.01em;
+    }
+    .topbar nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--logo-dark);
+      transition: width 0.28s ease;
+    }
+    .topbar nav a:hover { 
+      color: var(--logo-dark); 
+    }
+    .topbar nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding: 110px 0 95px;
+      background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 60%;
+      height: 120%;
+      background: radial-gradient(ellipse at center, rgba(30, 73, 118, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+    }
+    .hero .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      font-weight: 600;
+      margin-bottom: 26px;
+      display: inline-block;
+      padding: 7px 16px;
+      background: var(--accent-light);
+      border-radius: 3px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(46px, 6.2vw, 72px);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      max-width: 920px;
+      margin-bottom: 30px;
+      color: var(--logo-dark);
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--accent-primary);
+    }
+    .hero .lede {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin-bottom: 38px;
+      line-height: 1.75;
+      font-weight: 400;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .hero-meta .status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-meta .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #10B981;
+      display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.55; transform: scale(0.92); }
+    }
+
+    /* ---------- Section base ---------- */
+    section {
+      padding: 95px 0;
+    }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      font-weight: 600;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-label::before {
+      content: "";
+      width: 32px;
+      height: 3px;
+      background: var(--logo-dark);
+      border-radius: 2px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(36px, 4.6vw, 50px);
+      line-height: 1.18;
+      letter-spacing: -0.028em;
+      margin-bottom: 30px;
+      max-width: 820px;
+      color: var(--logo-dark);
+    }
+    h2 em {
+      font-style: italic;
+      color: var(--accent-primary);
+      font-weight: 500;
+    }
+
+    /* ---------- What I do ---------- */
+    #what {
+      background: var(--bg-primary);
+    }
+    .what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 38px;
+    }
+    .what-grid p {
+      color: var(--text-secondary);
+      font-size: 16px;
+      line-height: 1.78;
+      margin-bottom: 22px;
+    }
+    .pull {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.58;
+      color: var(--logo-dark);
+      padding: 32px;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border-left: 4px solid var(--logo-dark);
+      border-radius: 0 10px 10px 0;
+      box-shadow: var(--shadow-sm);
+      font-weight: 400;
+    }
+
+    /* ---------- Services ---------- */
+    #services {
+      background: var(--bg-secondary);
+    }
+    .services {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-top: 50px;
+      background: var(--bg-primary);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+    }
+    .tier {
+      display: grid;
+      grid-template-columns: 64px 2fr 1.3fr 1fr;
+      gap: 38px;
+      padding: 42px 48px;
+      border-bottom: 1px solid var(--border-light);
+      align-items: start;
+      transition: all 0.3s ease;
+    }
+    .tier:last-child { border-bottom: none; }
+    .tier:hover {
+      background: var(--bg-secondary);
+      transform: translateX(4px);
+    }
+    .tier-num {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 34px;
+      color: var(--logo-dark);
+      opacity: 0.6;
+    }
+    .tier-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 27px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+      color: var(--logo-dark);
+    }
+    .tier-tag {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .tier-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.68;
+    }
+    .tier-deliverables {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .tier-deliverables strong {
+      display: block;
+      font-weight: 600;
+      color: var(--logo-dark);
+      margin-bottom: 14px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .tier-deliverables ul {
+      list-style: none;
+    }
+    .tier-deliverables li {
+      padding: 7px 0;
+      position: relative;
+      padding-left: 22px;
+      color: var(--text-secondary);
+    }
+    .tier-deliverables li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent-primary);
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .tier-price {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 4px;
+    }
+    .tier-price .amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--logo-dark);
+    }
+    .tier-price .unit {
+      display: block;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* ---------- Process ---------- */
+    #process {
+      background: var(--bg-primary);
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-top: 48px;
+    }
+    .step {
+      padding: 32px 28px;
+      background: var(--bg-secondary);
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--logo-dark);
+      transform: scaleX(0);
+      transition: transform 0.35s ease;
+    }
+    .step:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--logo-dark);
+    }
+    .step:hover::before {
+      transform: scaleX(1);
+    }
+    .step-num {
+      font-size: 11px;
+      color: var(--accent-primary);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+      color: var(--logo-dark);
+    }
+    .step-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ---------- Honest section ---------- */
+    .honest-wrapper {
+      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+      padding: 85px 0;
+      margin: 0 -44px;
+      position: relative;
+    }
+    .honest-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230B1D2F' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .honest {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 52px 56px;
+      background: var(--bg-primary);
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-light);
+      position: relative;
+    }
+    .honest-label {
+      position: absolute;
+      top: -15px;
+      left: 48px;
+      background: var(--logo-dark);
+      color: white;
+      padding: 9px 20px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      border-radius: 4px;
+      box-shadow: var(--shadow-sm);
+    }
+    .honest h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 29px;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+      color: var(--logo-dark);
+    }
+    .honest p {
+      color: var(--text-secondary);
+      max-width: 740px;
+      margin-bottom: 18px;
+      line-height: 1.75;
+    }
+
+    /* ---------- Contact ---------- */
+    #contact.contact {
+      padding: 105px 0 95px;
+      background: var(--bg-primary);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-top: 38px;
+    }
+    .contact h2 { margin-bottom: 26px; }
+    .contact > .container > p {
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin-bottom: 34px;
+      line-height: 1.75;
+    }
+    .email-link {
+      display: inline-block;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4.2vw, 44px);
+      font-weight: 700;
+      color: var(--logo-dark);
+      text-decoration: none;
+      padding-bottom: 8px;
+      border-bottom: 3px solid var(--logo-dark);
+      transition: all 0.3s ease;
+      letter-spacing: -0.01em;
+    }
+    .email-link:hover {
+      color: var(--accent-primary);
+      border-color: var(--accent-primary);
+      transform: translateX(6px);
+    }
+    .contact-side {
+      font-size: 14px;
+      color: var(--text-secondary);
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      padding: 36px;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-side strong {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .contact-side .row {
+      margin-bottom: 24px;
+    }
+    .contact-side .row:last-child {
+      margin-bottom: 0;
+    }
+    .contact-side span {
+      color: var(--logo-dark);
+      font-weight: 500;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      padding: 40px 0;
+      background: var(--logo-dark);
+      color: white;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer span:first-child {
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    footer span:last-child {
+      opacity: 0.65;
+    }
+
+    /* ---------- Reveal animation ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      animation: fadeUp 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    .reveal-1 { animation-delay: 0.06s; }
+    .reveal-2 { animation-delay: 0.16s; }
+    .reveal-3 { animation-delay: 0.26s; }
+    .reveal-4 { animation-delay: 0.36s; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1024px) {
+      .container { padding: 0 36px; }
+      .what-grid { grid-template-columns: 1fr; gap: 40px; }
+      .tier {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 36px;
+      }
+      .tier-price { text-align: left; }
+      .process-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .topbar nav { gap: 32px; }
+      .hero { padding: 80px 0 70px; }
+      section { padding: 75px 0; }
+      .honest-wrapper { margin: 0 -36px; padding: 70px 36px; }
+      .honest { padding: 44px 36px; }
+      .honest-label { left: 36px; }
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 0 24px; }
+      .brand-logo { height: 32px; }
+      .topbar nav { display: none; }
+      .process-grid { grid-template-columns: 1fr; }
+      .hero-meta { flex-direction: column; gap: 18px; align-items: flex-start; }
+      .honest-wrapper { margin: 0 -24px; padding: 56px 24px; }
+      .honest { padding: 40px 28px; }
+      .honest-label { left: 24px; }
+      .hero h1 { font-size: 38px; }
+      h2 { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="topbar">
+        <div class="brand">
+          <img src="https://z-cdn-media.chatglm.cn/files/2f5e0210-549e-4c2d-9b5a-053e22c7e7aa.png?auth_key=1877997182-eb61d86b073148b28effdb2ddb92df77-0-53a0aec8980bf3098166b80fe50e8ee0" alt="KKS&CO Logo" class="brand-logo">
+        </div>
+        <nav>
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <div class="eyebrow reveal reveal-1">Metrics analysis · Bootstrapped SaaS</div>
+      <h1 class="reveal reveal-2">
+        Find what's <em>leaking</em> your MRR.
+      </h1>
+      <p class="lede reveal reveal-3">
+        Most founders at $3k–$10k MRR are flying blind. They have Stripe data, analytics events, and gut feelings — but no clear answer to which leak is costing them the most. That's what I do. I find it. Then I tell you exactly how to fix it.
+      </p>
+      <div class="hero-meta reveal reveal-4">
+        <span class="status"><span class="dot"></span>Currently accepting new clients</span>
+        <span>Remote · Async-first</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="what">
+    <div class="container">
+      <div class="section-label">What I do</div>
+      <h2>Plain analysis. <em>Specific</em> fixes. No fluff.</h2>
+      <div class="what-grid">
+        <div>
+          <p>Bootstrapped SaaS founders are usually past the "is this real" stage and stuck somewhere between $3k and $10k MRR. The problem isn't that they're lazy or that the product is bad. The problem is that nobody is reading their numbers carefully enough to find the one or two things actually holding them back.</p>
+          <p>I read the numbers carefully. Stripe, Paddle, Mixpanel, PostHog, GA4 — wherever the data lives. I look at churn cohorts, activation rates, trial conversion, expansion revenue, and pricing alignment. Then I tell you, in writing, the two or three things costing you the most money and exactly what to do about them.</p>
+        </div>
+        <div>
+          <div class="pull">
+            "Improve onboarding" is not advice. The advice is: users who don't connect their Stripe in the first 24 hours churn at 4× the rate — here's the in-app prompt to fix it.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <div class="section-label">Services</div>
+      <h2>Three ways to <em>work together</em>.</h2>
+
+      <div class="services">
+        <div class="tier">
+          <div class="tier-num">01</div>
+          <div>
+            <div class="tier-name">The Audit</div>
+            <div class="tier-tag">One-time · 5–7 days</div>
+            <div class="tier-desc">A focused diagnostic of your metrics. I get read-only access to your billing and analytics, spend a week digging in, and deliver a written report identifying the top 2–3 leaks ranked by estimated MRR impact — with specific fixes for each.</div>
+          </div>
+          <div class="tier-deliverables">
+            <strong>You receive</strong>
+            <ul>
+              <li>Written report (8–12 pages)</li>
+              <li>Top leaks, ranked by impact</li>
+              <li>Specific, actionable fixes</li>
+              <li>30-min walkthrough call</li>
+            </ul>
+          </div>
+          <div class="tier-price">
+            <div class="amount">$199</div>
+            <div class="unit">starting price</div>
+          </div>
+        </div>
+
+        <div class="tier">
+          <div class="tier-num">02</div>
+          <div>
+            <div class="tier-name">Monthly Partner</div>
+            <div class="tier-tag">Recurring · 3-month minimum</div>
+            <div class="tier-desc">Your fractional metrics person. Audit included in month one, then ongoing monitoring and analysis. Cheaper than hiring an analyst, more focused than another tool. For founders who want a second pair of eyes on the numbers every week.</div>
+          </div>
+          <div class="tier-deliverables">
+            <strong>You receive</strong>
+            <ul>
+              <li>Initial full audit</li>
+              <li>Live metrics dashboard</li>
+              <li>Weekly Loom walkthroughs</li>
+              <li>Monthly strategy call</li>
+              <li>Async Slack / email access</li>
+            </ul>
+          </div>
+          <div class="tier-price">
+            <div class="amount">$499</div>
+            <div class="unit">per month</div>
+          </div>
+        </div>
+
+        <div class="tier">
+          <div class="tier-num">03</div>
+          <div>
+            <div class="tier-name">Growth Sprint</div>
+            <div class="tier-tag">Focused · 6 weeks</div>
+            <div class="tier-desc">A targeted intervention on one specific outcome — cut churn by 30%, double trial-to-paid conversion, find your highest-LTV segment. Hands-on work, not just analysis. Documented playbook at the end so you can repeat it without me.</div>
+          </div>
+          <div class="tier-deliverables">
+            <strong>You receive</strong>
+            <ul>
+              <li>Deep audit of the focus area</li>
+              <li>Weekly working sessions</li>
+              <li>Implementation help</li>
+              <li>Repeatable playbook</li>
+              <li>30-day post-engagement support</li>
+            </ul>
+          </div>
+          <div class="tier-price">
+            <div class="amount">$2,500+</div>
+            <div class="unit">per engagement</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="container">
+      <div class="section-label">How an audit works</div>
+      <h2>Simple, written, <em>specific</em>.</h2>
+      <div class="process-grid">
+        <div class="step">
+          <div class="step-num">01 · Day 1</div>
+          <div class="step-title">Discovery call</div>
+          <div class="step-text">30 minutes. I learn your business, your ICP, and what you're actually worried about. You give me read-only access.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">02 · Days 2–5</div>
+          <div class="step-title">Deep analysis</div>
+          <div class="step-text">I pull your data, look at churn cohorts, conversion funnels, pricing alignment, and segment economics. I look for what's leaking.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">03 · Day 6</div>
+          <div class="step-title">Written report</div>
+          <div class="step-text">An 8–12 page PDF: current state, top 2–3 leaks with estimated impact, specific fixes, quick wins, and strategic recommendations.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">04 · Day 7</div>
+          <div class="step-title">Walkthrough</div>
+          <div class="step-text">30-minute call to walk through findings, answer questions, and discuss which fixes to tackle first. You leave with a plan.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="honest-wrapper">
+    <div class="container">
+      <div class="honest">
+        <div class="honest-label">A note on honesty</div>
+        <h3>Currently building case studies.</h3>
+        <p>KKS &amp; Co is a new practice. I'm in the phase of building proof — which means a small number of audits at reduced or pilot pricing in exchange for permission to share anonymized findings as case studies.</p>
+        <p>If you're a founder at $3k–$10k MRR and you'd be open to that arrangement, get in touch. Pilot slots fill quickly and won't be available indefinitely.</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-label">Contact</div>
+      <h2>Tell me about <em>your numbers</em>.</h2>
+      <div class="contact-grid">
+        <div>
+          <p>Send a short email — current MRR, what you sell, and what you're worried about. I read every message and reply within 48 hours.</p>
+          <a href="mailto:contact@kksandco.com" class="email-link">contact@kksandco.com</a>
+        </div>
+        <div class="contact-side">
+          <div class="row">
+            <strong>Response time</strong>
+            <span>Within 48 hours, weekdays</span>
+          </div>
+          <div class="row">
+            <strong>Working hours</strong>
+            <span>Mon–Fri, async-first</span>
+          </div>
+          <div class="row">
+            <strong>Based</strong>
+            <span>Remote · Working globally</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+      <span>© KKS &amp; Co</span>
+      <span>Metrics analysis for SaaS founders</span>
+    </div>
+  </footer>
+
+</body>
+</html>
