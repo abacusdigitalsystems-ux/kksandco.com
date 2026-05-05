@@ -3,503 +3,822 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="KKS & Co — a specialist advisory practice for AI-native SaaS founders. Unit economics, financial models, and fractional CFO support." />
-  <meta name="theme-color" content="#0A1F3D" />
-  <meta property="og:title" content="KKS & Co — Advisory for AI SaaS founders" />
-  <meta property="og:description" content="Rigorous unit-economics analysis, investor-ready financial models, and fractional finance support for AI-native SaaS founders." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://kksandco.com" />
-  <title>KKS &amp; Co — Advisory for AI SaaS founders</title>
+  <title>KKS &amp; Co — Metrics analysis for bootstrapped SaaS founders</title>
+  <meta name="description" content="Find what's leaking your MRR. Audits, retainers, and growth sprints for bootstrapped SaaS founders." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --logo-dark: #0B1D2F;
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F8F9FB;
+      --bg-tertiary: #EEF1F5;
+      --text-primary: #0B1D2F;
+      --text-secondary: #3D4F5F;
+      --text-muted: #7A8999;
+      --accent-primary: #1E4976;
+      --accent-hover: #153A5E;
+      --accent-light: #E8EFF6;
+      --border-light: #E2E8ED;
+      --border-medium: #CDD8E0;
+      --shadow-sm: 0 2px 8px rgba(11, 29, 47, 0.06);
+      --shadow-md: 0 4px 16px rgba(11, 29, 47, 0.08);
+      --shadow-lg: 0 12px 32px rgba(11, 29, 47, 0.12);
+    }
 
-  <!-- Preconnect for fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230A1F3D'/%3E%3Ctext x='50' y='62' text-anchor='middle' fill='%23F4EFE5' font-family='Georgia,serif' font-size='42' font-weight='500' font-style='italic'%3EK%3C/text%3E%3C/svg%3E" />
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 44px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ---------- Top bar ---------- */
+    header {
+      padding: 26px 0;
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border-light);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.97);
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+    }
+    .topbar nav {
+      display: flex;
+      gap: 40px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .topbar nav a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.28s ease;
+      position: relative;
+      letter-spacing: 0.01em;
+    }
+    .topbar nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--logo-dark);
+      transition: width 0.28s ease;
+    }
+    .topbar nav a:hover { 
+      color: var(--logo-dark); 
+    }
+    .topbar nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding: 110px 0 95px;
+      background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      right: -5%;
+      width: 60%;
+      height: 120%;
+      background: radial-gradient(ellipse at center, rgba(30, 73, 118, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-light), transparent);
+    }
+    .hero .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      font-weight: 600;
+      margin-bottom: 26px;
+      display: inline-block;
+      padding: 7px 16px;
+      background: var(--accent-light);
+      border-radius: 3px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(46px, 6.2vw, 72px);
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      max-width: 920px;
+      margin-bottom: 30px;
+      color: var(--logo-dark);
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 500;
+      color: var(--accent-primary);
+    }
+    .hero .lede {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin-bottom: 38px;
+      line-height: 1.75;
+      font-weight: 400;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 36px;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .hero-meta .status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-meta .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #10B981;
+      display: inline-block;
+      animation: pulse 2s ease-in-out infinite;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.55; transform: scale(0.92); }
+    }
+
+    /* ---------- Section base ---------- */
+    section {
+      padding: 95px 0;
+    }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-primary);
+      font-weight: 600;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .section-label::before {
+      content: "";
+      width: 32px;
+      height: 3px;
+      background: var(--logo-dark);
+      border-radius: 2px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(36px, 4.6vw, 50px);
+      line-height: 1.18;
+      letter-spacing: -0.028em;
+      margin-bottom: 30px;
+      max-width: 820px;
+      color: var(--logo-dark);
+    }
+    h2 em {
+      font-style: italic;
+      color: var(--accent-primary);
+      font-weight: 500;
+    }
+
+    /* ---------- What I do ---------- */
+    #what {
+      background: var(--bg-primary);
+    }
+    .what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 38px;
+    }
+    .what-grid p {
+      color: var(--text-secondary);
+      font-size: 16px;
+      line-height: 1.78;
+      margin-bottom: 22px;
+    }
+    .pull {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.58;
+      color: var(--logo-dark);
+      padding: 32px;
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      border-left: 4px solid var(--logo-dark);
+      border-radius: 0 10px 10px 0;
+      box-shadow: var(--shadow-sm);
+      font-weight: 400;
+    }
+
+    /* ---------- Services ---------- */
+    #services {
+      background: var(--bg-secondary);
+    }
+    .services {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-top: 50px;
+      background: var(--bg-primary);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-light);
+    }
+    .tier {
+      display: grid;
+      grid-template-columns: 64px 2fr 1.3fr 1fr;
+      gap: 38px;
+      padding: 42px 48px;
+      border-bottom: 1px solid var(--border-light);
+      align-items: start;
+      transition: all 0.3s ease;
+    }
+    .tier:last-child { border-bottom: none; }
+    .tier:hover {
+      background: var(--bg-secondary);
+      transform: translateX(4px);
+    }
+    .tier-num {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 34px;
+      color: var(--logo-dark);
+      opacity: 0.6;
+    }
+    .tier-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 27px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+      color: var(--logo-dark);
+    }
+    .tier-tag {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .tier-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.68;
+    }
+    .tier-deliverables {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .tier-deliverables strong {
+      display: block;
+      font-weight: 600;
+      color: var(--logo-dark);
+      margin-bottom: 14px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .tier-deliverables ul {
+      list-style: none;
+    }
+    .tier-deliverables li {
+      padding: 7px 0;
+      position: relative;
+      padding-left: 22px;
+      color: var(--text-secondary);
+    }
+    .tier-deliverables li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent-primary);
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .tier-price {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 4px;
+    }
+    .tier-price .amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--logo-dark);
+    }
+    .tier-price .unit {
+      display: block;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    /* ---------- Process ---------- */
+    #process {
+      background: var(--bg-primary);
+    }
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-top: 48px;
+    }
+    .step {
+      padding: 32px 28px;
+      background: var(--bg-secondary);
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--logo-dark);
+      transform: scaleX(0);
+      transition: transform 0.35s ease;
+    }
+    .step:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--logo-dark);
+    }
+    .step:hover::before {
+      transform: scaleX(1);
+    }
+    .step-num {
+      font-size: 11px;
+      color: var(--accent-primary);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+      color: var(--logo-dark);
+    }
+    .step-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ---------- Honest section ---------- */
+    .honest-wrapper {
+      background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+      padding: 85px 0;
+      margin: 0 -44px;
+      position: relative;
+    }
+    .honest-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230B1D2F' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .honest {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 52px 56px;
+      background: var(--bg-primary);
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-light);
+      position: relative;
+    }
+    .honest-label {
+      position: absolute;
+      top: -15px;
+      left: 48px;
+      background: var(--logo-dark);
+      color: white;
+      padding: 9px 20px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      border-radius: 4px;
+      box-shadow: var(--shadow-sm);
+    }
+    .honest h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 29px;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+      color: var(--logo-dark);
+    }
+    .honest p {
+      color: var(--text-secondary);
+      max-width: 740px;
+      margin-bottom: 18px;
+      line-height: 1.75;
+    }
+
+    /* ---------- Contact ---------- */
+    #contact.contact {
+      padding: 105px 0 95px;
+      background: var(--bg-primary);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 64px;
+      align-items: start;
+      margin-top: 38px;
+    }
+    .contact h2 { margin-bottom: 26px; }
+    .contact > .container > p {
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin-bottom: 34px;
+      line-height: 1.75;
+    }
+    .email-link {
+      display: inline-block;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4.2vw, 44px);
+      font-weight: 700;
+      color: var(--logo-dark);
+      text-decoration: none;
+      padding-bottom: 8px;
+      border-bottom: 3px solid var(--logo-dark);
+      transition: all 0.3s ease;
+      letter-spacing: -0.01em;
+    }
+    .email-link:hover {
+      color: var(--accent-primary);
+      border-color: var(--accent-primary);
+      transform: translateX(6px);
+    }
+    .contact-side {
+      font-size: 14px;
+      color: var(--text-secondary);
+      background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+      padding: 36px;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-side strong {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .contact-side .row {
+      margin-bottom: 24px;
+    }
+    .contact-side .row:last-child {
+      margin-bottom: 0;
+    }
+    .contact-side span {
+      color: var(--logo-dark);
+      font-weight: 500;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      padding: 40px 0;
+      background: var(--logo-dark);
+      color: white;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer span:first-child {
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    footer span:last-child {
+      opacity: 0.65;
+    }
+
+    /* ---------- Reveal animation ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      animation: fadeUp 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    .reveal-1 { animation-delay: 0.06s; }
+    .reveal-2 { animation-delay: 0.16s; }
+    .reveal-3 { animation-delay: 0.26s; }
+    .reveal-4 { animation-delay: 0.36s; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 1024px) {
+      .container { padding: 0 36px; }
+      .what-grid { grid-template-columns: 1fr; gap: 40px; }
+      .tier {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 36px;
+      }
+      .tier-price { text-align: left; }
+      .process-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .topbar nav { gap: 32px; }
+      .hero { padding: 80px 0 70px; }
+      section { padding: 75px 0; }
+      .honest-wrapper { margin: 0 -36px; padding: 70px 36px; }
+      .honest { padding: 44px 36px; }
+      .honest-label { left: 36px; }
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 0 24px; }
+      .brand-logo { height: 32px; }
+      .topbar nav { display: none; }
+      .process-grid { grid-template-columns: 1fr; }
+      .hero-meta { flex-direction: column; gap: 18px; align-items: flex-start; }
+      .honest-wrapper { margin: 0 -24px; padding: 56px 24px; }
+      .honest { padding: 40px 28px; }
+      .honest-label { left: 24px; }
+      .hero h1 { font-size: 38px; }
+      h2 { font-size: 32px; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ================= HEADER ================= -->
-  <header class="site-header" id="top">
-    <div class="container header-inner">
-      <a href="#top" class="brand" aria-label="KKS & Co — home">
-        <span class="brand-mark">KKS</span>
-        <span class="brand-amp">&amp;</span>
-        <span class="brand-co">Co</span>
-      </a>
-      <nav class="primary-nav" aria-label="Primary">
-        <ul>
-          <li><a href="#approach">Approach</a></li>
-          <li><a href="#practice">Practice</a></li>
-          <li><a href="#insights">Insights</a></li>
-          <li><a href="#principal">Principal</a></li>
-          <li><a href="#engage" class="nav-cta">Engage</a></li>
-        </ul>
-      </nav>
-      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+  <header>
+    <div class="container">
+      <div class="topbar">
+        <div class="brand">
+          <img src="https://z-cdn-media.chatglm.cn/files/2f5e0210-549e-4c2d-9b5a-053e22c7e7aa.png?auth_key=1877997182-eb61d86b073148b28effdb2ddb92df77-0-53a0aec8980bf3098166b80fe50e8ee0" alt="KKS&CO Logo" class="brand-logo">
+        </div>
+        <nav>
+          <a href="#services">Services</a>
+          <a href="#process">Process</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
     </div>
   </header>
 
-  <!-- ================= HERO ================= -->
   <section class="hero">
     <div class="container">
-      <div class="hero-meta">
-        <span class="dateline">Established <time datetime="2026">MMXXVI</time></span>
-        <span class="separator" aria-hidden="true">&mdash;</span>
-        <span class="location">Colombo &middot; Remote, worldwide</span>
-      </div>
-
-      <h1 class="hero-title">
-        <span class="line">Rigorous unit&#8209;economics analysis</span>
-        <span class="line">for AI&#8209;native SaaS founders</span>
-        <span class="line italic">who plan to defend their valuation.</span>
+      <div class="eyebrow reveal reveal-1">Metrics analysis · Bootstrapped SaaS</div>
+      <h1 class="reveal reveal-2">
+        Find what's <em>leaking</em> your MRR.
       </h1>
-
-      <div class="hero-foot">
-        <p class="hero-lede">
-          KKS &amp; Co is a specialist corporate advisory practice working with
-          AI SaaS companies between
-          <span class="num">USD&nbsp;100K</span> and
-          <span class="num">USD&nbsp;5M</span> in annual recurring revenue.
-          We build the model, identify the leaks, and produce the
-          documentation that survives a real diligence process.
-        </p>
-        <a href="#engage" class="btn-primary">
-          Begin a conversation
-          <svg viewBox="0 0 24 12" aria-hidden="true" width="32" height="14">
-            <path d="M0 6 L22 6 M16 1 L22 6 L16 11" stroke="currentColor" stroke-width="1.2" fill="none"/>
-          </svg>
-        </a>
+      <p class="lede reveal reveal-3">
+        Most founders at $3k–$10k MRR are flying blind. They have Stripe data, analytics events, and gut feelings — but no clear answer to which leak is costing them the most. That's what I do. I find it. Then I tell you exactly how to fix it.
+      </p>
+      <div class="hero-meta reveal reveal-4">
+        <span class="status"><span class="dot"></span>Currently accepting new clients</span>
+        <span>Remote · Async-first</span>
       </div>
     </div>
   </section>
 
-  <!-- ================= APPROACH ================= -->
-  <section class="section section-approach" id="approach">
-    <div class="container grid-12">
-      <div class="section-marker">
-        <span class="marker-num">01</span>
-        <span class="marker-label">Approach</span>
-      </div>
-
-      <div class="section-body">
-        <h2 class="section-title">
-          The economics of an AI SaaS business are not the economics of a
-          traditional SaaS business.
-        </h2>
-
-        <div class="prose">
-          <p>
-            Inference cost flows through cost of goods sold, compressing gross
-            margin to ranges (50&ndash;70 percent) that conventional SaaS
-            benchmarks misread as alarming. Usage-based pricing breaks the
-            standard lifetime-value formula. Cohort retention curves behave
-            differently when the product itself is improving with each model
-            release. None of this fits the templates a generalist fractional
-            CFO will hand you.
-          </p>
-          <p>
-            Most existing finance advisors apply 2018-era SaaS frameworks to
-            2026-vintage AI companies. The conclusions that result are confident
-            and frequently wrong. Founders walk into investor meetings with
-            numbers that misrepresent their own business, and lose rounds they
-            should have won.
-          </p>
-          <p>
-            We work narrowly so we can work deeply. The practice does one thing:
-            help AI SaaS founders understand their real economics, in
-            language that holds up under sceptical questioning.
-          </p>
-        </div>
-
-        <ul class="pillars">
-          <li>
-            <span class="pillar-num">i.</span>
-            <h3>Inference&#8209;adjusted gross margin</h3>
-            <p>True unit cost modelling, by tier and by user behaviour, not flat
-              assumptions imported from horizontal SaaS.</p>
-          </li>
-          <li>
-            <span class="pillar-num">ii.</span>
-            <h3>Cohort retention truth</h3>
-            <p>Pulling raw subscription data and rebuilding cohorts from
-              the ground up. The first time most founders see how their
-              business actually retains.</p>
-          </li>
-          <li>
-            <span class="pillar-num">iii.</span>
-            <h3>Investor&#8209;defensible documentation</h3>
-            <p>Models and reports calibrated to survive due diligence
-              from a fund that has seen two hundred AI decks this quarter.</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= PRACTICE ================= -->
-  <section class="section section-practice" id="practice">
-    <div class="container grid-12">
-      <div class="section-marker">
-        <span class="marker-num">02</span>
-        <span class="marker-label">Practice</span>
-      </div>
-
-      <div class="section-body">
-        <h2 class="section-title">
-          Three engagements, sequenced to a founder&rsquo;s journey.
-        </h2>
-
-        <div class="services">
-
-          <article class="service">
-            <header class="service-head">
-              <span class="service-tag">Diagnostic &middot; 14 days</span>
-              <h3 class="service-name">
-                AI SaaS Unit Economics Audit
-              </h3>
-              <p class="service-price"><span class="num">USD&nbsp;2,500</span></p>
-            </header>
-            <div class="service-body">
-              <p>
-                A structured diagnostic that produces a complete unit-economics
-                picture of the business with explicit attention to AI-specific
-                drivers. The output is operationally useful for the founder
-                and presentable to current and prospective investors.
-              </p>
-              <h4>Deliverables</h4>
-              <ul>
-                <li>Custom financial model (Excel or Sheets), 36-month horizon</li>
-                <li>15&ndash;20 page diagnostic report</li>
-                <li>Cohort-retention table built from raw subscription data</li>
-                <li>60-minute findings walkthrough</li>
-                <li>30-day post-delivery email support</li>
-              </ul>
-              <p class="service-fit">
-                <span class="label">Best fit:</span>
-                Founder-led AI SaaS at USD&nbsp;100K&ndash;3M ARR, fundraising
-                soon or facing margin pressure.
-              </p>
-            </div>
-          </article>
-
-          <article class="service">
-            <header class="service-head">
-              <span class="service-tag">Fundraise package &middot; 21 days</span>
-              <h3 class="service-name">
-                Investor&#8209;Ready Financial Model
-              </h3>
-              <p class="service-price"><span class="num">USD&nbsp;4,500&ndash;8,000</span></p>
-            </header>
-            <div class="service-body">
-              <p>
-                Five-year three-statement model and supporting fundraise
-                materials calibrated to the AI SaaS investor audience. Built
-                on the analytical foundation of the audit but extended into
-                forward projection, scenario work, and investor narrative.
-              </p>
-              <h4>Deliverables</h4>
-              <ul>
-                <li>Five-year P&amp;L, balance sheet, and cash flow with scenario toggles</li>
-                <li>SaaS KPI dashboard with AI-specific metrics</li>
-                <li>Investor-summary tab formatted for data rooms</li>
-                <li>Fundraise narrative document</li>
-                <li>Two pitch &amp; diligence coaching sessions</li>
-                <li>45-day post-delivery support window</li>
-              </ul>
-              <p class="service-fit">
-                <span class="label">Best fit:</span>
-                AI SaaS at USD&nbsp;250K&ndash;5M ARR, actively fundraising or
-                preparing within three months.
-              </p>
-            </div>
-          </article>
-
-          <article class="service">
-            <header class="service-head">
-              <span class="service-tag">Retainer &middot; ongoing</span>
-              <h3 class="service-name">
-                Fractional CFO Engagement
-              </h3>
-              <p class="service-price"><span class="num">USD&nbsp;1,500&ndash;3,500</span> &middot; per month</p>
-            </header>
-            <div class="service-body">
-              <p>
-                Ongoing financial leadership: maintaining the model,
-                producing monthly board and investor reports, tracking KPIs
-                against plan, advising on pricing changes, and supporting
-                transactional events. Reserved for clients who have completed
-                a prior engagement.
-              </p>
-              <h4>Each month</h4>
-              <ul>
-                <li>Updated model reflecting actuals and refreshed projections</li>
-                <li>Monthly board pack: KPIs, variance, cash runway, key issues</li>
-                <li>Two scheduled calls with the leadership team</li>
-                <li>Asynchronous support, 24-hour response</li>
-                <li>Annual deep review of performance and plan</li>
-              </ul>
-              <p class="service-fit">
-                <span class="label">Terms:</span>
-                Three-month minimum; thereafter 30 days&rsquo; notice. Annual commitment at 10% discount.
-              </p>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= NOW / CURRENT FOCUS ================= -->
-  <section class="section section-now" id="now">
+  <section id="what">
     <div class="container">
-      <div class="now-inner">
-        <div class="now-marker">
-          <span class="now-label">Currently</span>
-          <span class="now-pulse" aria-hidden="true"></span>
+      <div class="section-label">What I do</div>
+      <h2>Plain analysis. <em>Specific</em> fixes. No fluff.</h2>
+      <div class="what-grid">
+        <div>
+          <p>Bootstrapped SaaS founders are usually past the "is this real" stage and stuck somewhere between $3k and $10k MRR. The problem isn't that they're lazy or that the product is bad. The problem is that nobody is reading their numbers carefully enough to find the one or two things actually holding them back.</p>
+          <p>I read the numbers carefully. Stripe, Paddle, Mixpanel, PostHog, GA4 — wherever the data lives. I look at churn cohorts, activation rates, trial conversion, expansion revenue, and pricing alignment. Then I tell you, in writing, the two or three things costing you the most money and exactly what to do about them.</p>
         </div>
-        <p class="now-statement">
-          Reading deeply on inference-cost economics, gross-margin trajectories
-          for foundation-model wrappers, and the divergence between AI-native
-          retention curves and traditional SaaS cohort behaviour. Writing
-          publicly twice monthly. Open to a small number of pro-bono
-          diagnostics for founders who fit the practice&rsquo;s focus.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= INSIGHTS ================= -->
-  <section class="section section-insights" id="insights">
-    <div class="container grid-12">
-      <div class="section-marker">
-        <span class="marker-num">03</span>
-        <span class="marker-label">Insights</span>
-      </div>
-
-      <div class="section-body">
-        <div class="insights-head">
-          <h2 class="section-title">
-            Notes from the practice.
-          </h2>
-          <a href="insights.html" class="link-arrow">
-            View archive
-            <svg viewBox="0 0 24 12" aria-hidden="true" width="22" height="11">
-              <path d="M0 6 L22 6 M16 1 L22 6 L16 11" stroke="currentColor" stroke-width="1.2" fill="none"/>
-            </svg>
-          </a>
-        </div>
-
-        <div class="articles">
-          <article class="article-card">
-            <span class="article-meta">Forthcoming &middot; Unit economics</span>
-            <h3 class="article-title">
-              The four ways founders mis&#8209;state their gross margin in
-              AI SaaS
-            </h3>
-            <p class="article-excerpt">
-              Inference is now twelve to thirty per cent of revenue at
-              the median AI SaaS company. The conventions that worked for
-              horizontal SaaS no longer survive contact with a serious
-              diligence process.
-            </p>
-            <span class="article-link">Read &rarr;</span>
-          </article>
-
-          <article class="article-card">
-            <span class="article-meta">Forthcoming &middot; Cohort analysis</span>
-            <h3 class="article-title">
-              Why your D30 retention is lying to you
-            </h3>
-            <p class="article-excerpt">
-              The first thirty days of an AI product&rsquo;s use rarely
-              predict the next twelve months. A practical method for
-              rebuilding cohort tables that show what actually compounds.
-            </p>
-            <span class="article-link">Read &rarr;</span>
-          </article>
-
-          <article class="article-card">
-            <span class="article-meta">Forthcoming &middot; Pricing</span>
-            <h3 class="article-title">
-              The middle&#8209;tier vacuum in AI SaaS pricing
-            </h3>
-            <p class="article-excerpt">
-              A common pricing pattern leaves twenty to thirty per cent
-              of ARPU on the table by skipping a tier most users would
-              cluster in. A teardown of three live examples.
-            </p>
-            <span class="article-link">Read &rarr;</span>
-          </article>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= PRINCIPAL ================= -->
-  <section class="section section-principal" id="principal">
-    <div class="container grid-12">
-      <div class="section-marker">
-        <span class="marker-num">04</span>
-        <span class="marker-label">Principal</span>
-      </div>
-
-      <div class="section-body principal-body">
-        <h2 class="section-title">
-          The practice is the work of one person, by design.
-        </h2>
-
-        <div class="principal-grid">
-          <div class="prose">
-            <p>
-              KKS &amp; Co is led by [Founder name], a corporate finance
-              practitioner working at the intersection of mathematics, economics,
-              and software. The practice is deliberately small: one principal,
-              a small number of engagements per quarter, work delivered to a
-              standard that produces referrals.
-            </p>
-            <p>
-              The longer arc is to compound this practice into a permanent-capital
-              investment vehicle over the coming decades. Every client engagement
-              builds toward that destination, and every dollar of revenue is
-              allocated with that horizon in mind.
-            </p>
-            <p>
-              Operating from Colombo, Sri Lanka. Working internationally,
-              asynchronously, and in writing.
-            </p>
+        <div>
+          <div class="pull">
+            "Improve onboarding" is not advice. The advice is: users who don't connect their Stripe in the first 24 hours churn at 4× the rate — here's the in-app prompt to fix it.
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-          <aside class="principal-card">
-            <h4>Background &amp; training</h4>
-            <ul class="principal-list">
-              <li>
-                <span class="list-label">Reading</span>
-                <span>BSc Mathematics &amp; Economics, University of London (in progress)</span>
-              </li>
-              <li>
-                <span class="list-label">Pursuing</span>
-                <span>CA Sri Lanka, CFA Programme</span>
-              </li>
-              <li>
-                <span class="list-label">Writing</span>
-                <span>Twice-monthly notes on AI SaaS unit economics</span>
-              </li>
-              <li>
-                <span class="list-label">Reachable</span>
-                <span><a href="mailto:hello@kksandco.com">hello@kksandco.com</a></span>
-              </li>
+  <section id="services">
+    <div class="container">
+      <div class="section-label">Services</div>
+      <h2>Three ways to <em>work together</em>.</h2>
+
+      <div class="services">
+        <div class="tier">
+          <div class="tier-num">01</div>
+          <div>
+            <div class="tier-name">The Audit</div>
+            <div class="tier-tag">One-time · 5–7 days</div>
+            <div class="tier-desc">A focused diagnostic of your metrics. I get read-only access to your billing and analytics, spend a week digging in, and deliver a written report identifying the top 2–3 leaks ranked by estimated MRR impact — with specific fixes for each.</div>
+          </div>
+          <div class="tier-deliverables">
+            <strong>You receive</strong>
+            <ul>
+              <li>Written report (8–12 pages)</li>
+              <li>Top leaks, ranked by impact</li>
+              <li>Specific, actionable fixes</li>
+              <li>30-min walkthrough call</li>
             </ul>
-          </aside>
+          </div>
+          <div class="tier-price">
+            <div class="amount">$199</div>
+            <div class="unit">starting price</div>
+          </div>
+        </div>
+
+        <div class="tier">
+          <div class="tier-num">02</div>
+          <div>
+            <div class="tier-name">Monthly Partner</div>
+            <div class="tier-tag">Recurring · 3-month minimum</div>
+            <div class="tier-desc">Your fractional metrics person. Audit included in month one, then ongoing monitoring and analysis. Cheaper than hiring an analyst, more focused than another tool. For founders who want a second pair of eyes on the numbers every week.</div>
+          </div>
+          <div class="tier-deliverables">
+            <strong>You receive</strong>
+            <ul>
+              <li>Initial full audit</li>
+              <li>Live metrics dashboard</li>
+              <li>Weekly Loom walkthroughs</li>
+              <li>Monthly strategy call</li>
+              <li>Async Slack / email access</li>
+            </ul>
+          </div>
+          <div class="tier-price">
+            <div class="amount">$499</div>
+            <div class="unit">per month</div>
+          </div>
+        </div>
+
+        <div class="tier">
+          <div class="tier-num">03</div>
+          <div>
+            <div class="tier-name">Growth Sprint</div>
+            <div class="tier-tag">Focused · 6 weeks</div>
+            <div class="tier-desc">A targeted intervention on one specific outcome — cut churn by 30%, double trial-to-paid conversion, find your highest-LTV segment. Hands-on work, not just analysis. Documented playbook at the end so you can repeat it without me.</div>
+          </div>
+          <div class="tier-deliverables">
+            <strong>You receive</strong>
+            <ul>
+              <li>Deep audit of the focus area</li>
+              <li>Weekly working sessions</li>
+              <li>Implementation help</li>
+              <li>Repeatable playbook</li>
+              <li>30-day post-engagement support</li>
+            </ul>
+          </div>
+          <div class="tier-price">
+            <div class="amount">$2,500+</div>
+            <div class="unit">per engagement</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= ENGAGEMENT ================= -->
-  <section class="section section-engage" id="engage">
+  <section id="process">
     <div class="container">
-      <div class="engage-inner">
-        <span class="engage-marker">05 &middot; Engagement</span>
-        <h2 class="engage-title">
-          A short call is the right place to start.
-        </h2>
-        <p class="engage-prose">
-          Thirty minutes. We discuss your business, where the unit economics
-          are unclear or contested, and whether the practice is a sensible fit.
-          No pitch, no obligation. If we are not the right people for you, we
-          will tell you so and try to suggest who might be.
-        </p>
-        <div class="engage-actions">
-          <a href="https://cal.com/kksandco" class="btn-primary btn-large">
-            Book a discovery call
-            <svg viewBox="0 0 24 12" aria-hidden="true" width="36" height="16">
-              <path d="M0 6 L22 6 M16 1 L22 6 L16 11" stroke="currentColor" stroke-width="1.2" fill="none"/>
-            </svg>
-          </a>
-          <a href="mailto:hello@kksandco.com" class="btn-secondary">
-            Or write directly
-          </a>
+      <div class="section-label">How an audit works</div>
+      <h2>Simple, written, <em>specific</em>.</h2>
+      <div class="process-grid">
+        <div class="step">
+          <div class="step-num">01 · Day 1</div>
+          <div class="step-title">Discovery call</div>
+          <div class="step-text">30 minutes. I learn your business, your ICP, and what you're actually worried about. You give me read-only access.</div>
         </div>
+        <div class="step">
+          <div class="step-num">02 · Days 2–5</div>
+          <div class="step-title">Deep analysis</div>
+          <div class="step-text">I pull your data, look at churn cohorts, conversion funnels, pricing alignment, and segment economics. I look for what's leaking.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">03 · Day 6</div>
+          <div class="step-title">Written report</div>
+          <div class="step-text">An 8–12 page PDF: current state, top 2–3 leaks with estimated impact, specific fixes, quick wins, and strategic recommendations.</div>
+        </div>
+        <div class="step">
+          <div class="step-num">04 · Day 7</div>
+          <div class="step-title">Walkthrough</div>
+          <div class="step-text">30-minute call to walk through findings, answer questions, and discuss which fixes to tackle first. You leave with a plan.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="engage-detail">
-          <div>
-            <span class="detail-label">Office hours</span>
-            <span class="detail-value">Mon&ndash;Fri &middot; 14:00&ndash;22:00 GMT+5:30</span>
+  <div class="honest-wrapper">
+    <div class="container">
+      <div class="honest">
+        <div class="honest-label">A note on honesty</div>
+        <h3>Currently building case studies.</h3>
+        <p>KKS &amp; Co is a new practice. I'm in the phase of building proof — which means a small number of audits at reduced or pilot pricing in exchange for permission to share anonymized findings as case studies.</p>
+        <p>If you're a founder at $3k–$10k MRR and you'd be open to that arrangement, get in touch. Pilot slots fill quickly and won't be available indefinitely.</p>
+      </div>
+    </div>
+  </div>
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <div class="section-label">Contact</div>
+      <h2>Tell me about <em>your numbers</em>.</h2>
+      <div class="contact-grid">
+        <div>
+          <p>Send a short email — current MRR, what you sell, and what you're worried about. I read every message and reply within 48 hours.</p>
+          <a href="mailto:contact@kksandco.com" class="email-link">contact@kksandco.com</a>
+        </div>
+        <div class="contact-side">
+          <div class="row">
+            <strong>Response time</strong>
+            <span>Within 48 hours, weekdays</span>
           </div>
-          <div>
-            <span class="detail-label">Response time</span>
-            <span class="detail-value">Within 24 hours, business days</span>
+          <div class="row">
+            <strong>Working hours</strong>
+            <span>Mon–Fri, async-first</span>
           </div>
-          <div>
-            <span class="detail-label">Engagement minimum</span>
-            <span class="detail-value"><span class="num">USD&nbsp;2,500</span></span>
+          <div class="row">
+            <strong>Based</strong>
+            <span>Remote · Working globally</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= FOOTER ================= -->
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <span class="footer-logo">
-          <span>KKS</span>
-          <span class="amp">&amp;</span>
-          <span>Co</span>
-        </span>
-        <p class="footer-tagline">
-          Advisory for AI&#8209;native SaaS founders.
-        </p>
-      </div>
-
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h5>Practice</h5>
-          <ul>
-            <li><a href="#approach">Approach</a></li>
-            <li><a href="#practice">Services</a></li>
-            <li><a href="#insights">Insights</a></li>
-            <li><a href="#principal">Principal</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5>Channels</h5>
-          <ul>
-            <li><a href="https://twitter.com/kksandco" rel="me">Twitter / X</a></li>
-            <li><a href="https://kksandco.substack.com" rel="me">Substack</a></li>
-            <li><a href="https://linkedin.com/company/kksandco" rel="me">LinkedIn</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h5>Contact</h5>
-          <ul>
-            <li><a href="mailto:hello@kksandco.com">hello@kksandco.com</a></li>
-            <li><a href="https://cal.com/kksandco">Book a call</a></li>
-            <li>Colombo, Sri Lanka</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-rule"></div>
-
-      <div class="footer-bottom">
-        <span>&copy; <span id="year">2026</span> KKS &amp; Co. All rights reserved.</span>
-        <span class="colophon">
-          Set in Fraunces and IBM Plex Sans. Built by hand.
-        </span>
-      </div>
+  <footer>
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+      <span>© KKS &amp; Co</span>
+      <span>Metrics analysis for SaaS founders</span>
     </div>
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>
